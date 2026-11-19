@@ -1,9 +1,13 @@
 import * as fs from 'node:fs';
 import * as path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-const src = 'entry.png';
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const botDir = process.env.MAKEFUN_BOT_DIR || __dirname;
+const src = path.join(botDir, 'entry.png');
+
 if (!fs.existsSync(src)) {
-  console.error(`Error: Required file '${src}' not found at repository root.`);
+  console.error(`Error: Required file '${src}' not found.`);
   process.exit(1);
 }
 
